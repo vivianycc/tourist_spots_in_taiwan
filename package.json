@@ -1,6 +1,6 @@
 {
   "name": "tourist-spots-in-taiwan",
-  "homepage": "http://www.vivianychen.com/tourist_spots_in_taiwan/",
+  "homepage": "http://www.vivianychen.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

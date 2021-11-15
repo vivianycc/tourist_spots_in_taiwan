@@ -12,3 +12,7 @@ export function getAuthorizationHeader() {
 
   return { Authorization: Authorization, "X-Date": GMTString };
 }
+
+export function isEmpty(obj) {
+  return Object.keys(obj).length === 0;
+}

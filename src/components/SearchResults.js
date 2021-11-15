@@ -8,9 +8,11 @@ function SearchResults({ spots }) {
       ) : (
         spots.map((spot) => (
           <Spot
+            id={spot.ID}
             key={spot.ID}
             name={spot.Name}
             description={spot.DescriptionDetail}
+            picture={spot.Picture}
           />
         ))
       )}

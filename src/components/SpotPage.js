@@ -1,64 +1,141 @@
+import { useState, useEffect } from "react";
 import IconButton from "./IconButton";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { getAuthorizationHeader } from "../helper";
+import DefaultImgs from "../assets";
 import {
   ChevronLeft,
   Clock,
   MapPin,
   Map,
   Phone,
-  Link,
+  ExternalLink,
   Edit2,
   Check,
   X,
 } from "react-feather";
-function SpotPage() {
+
+function SpotPage(props) {
+  const defaultData = {};
+  // {
+  //   name: "景點名稱",
+  //   desc: "景點敘述",
+  //   picture: {},
+  //   class1: "",
+  //   openTime: "open time",
+  //   parking: {},
+  //   updateTime: {},
+  //   website: "website url",
+  //   address: "address",
+  //   phone: "phone number",
+  //   position: {},
+  // };
+  const [spotInfo, setSpotInfo] = useState(defaultData);
+  const { id } = useParams();
+  let navigate = useNavigate();
+  const API_URL = `https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$filter=ID%20eq%20'${id}'&$top=3&$format=JSON`;
+
+  useEffect(() => {
+    requestData();
+  }, []);
+
+  async function requestData() {
+    const { data } = await axios.get(API_URL, {
+      headers: getAuthorizationHeader(),
+    });
+
+    setSpotInfo(data[0]);
+  }
+
+  const {
+    Name: name = "景點名稱",
+    DescriptionDetail: desc = "description",
+    Picture: picture = {},
+    Class1: class1 = "",
+    OpenTime: openTime = "open time",
+    ParkingPosition: parking = {},
+    UpdateTime: updateTime = "update time",
+    WebsiteUrl: website = "",
+    Address: address = "address",
+    Phone: phone = "phone num",
+    Position: position = {},
+  } = spotInfo;
+  const { PictureUrl1: picUrl, PictureDescription1: picDesc } = picture;
+
   return (
     <div className="spot-page">
       <header>
-        <IconButton>
+        <IconButton
+          className="white back-button"
+          clickHandler={() => navigate(-1)}
+        >
           <ChevronLeft />
         </IconButton>
         <div className="title-content">
-          <h1>Name of the Spot</h1>
-          <div className="label">小標籤</div>
+          <h1>{name}</h1>
+          {class1 ? <div className="label">{class1}</div> : null}
+        </div>
+        <div className="spot-header-img">
+          <img src={picUrl ? picUrl : DefaultImgs.spot} alt={picDesc} />
         </div>
       </header>
       <div className="spot-content">
         <div className="spot-info">
           <div className="open-time">
             <Clock />
-            <span>
-              全年除春祭（3月29日）、秋祭（9月3日）祭典前一日及當日中午前暫停開放外，均免費對外開放，每日參觀時間自上午0900時至下午1700時",
-            </span>
+            <span>{openTime ? openTime : "沒有資料"}</span>
           </div>
-          <div className="website">
-            <Link />
-            <span>https://afrc.mnd.gov.tw/faith_martyr/index.aspx</span>
-          </div>
-          <address className="address">
-            <MapPin />
-            <span>臺北市</span>
-          </address>
+          {website ? (
+            <div className="website">
+              <ExternalLink />
+              <Link to={website}>{website}</Link>
+            </div>
+          ) : null}
+          {address ? (
+            <address className="address">
+              <MapPin />
+              <span>臺北市</span>
+            </address>
+          ) : null}
           <div className="parking">
-            <Check />
-            <span>有停車位</span>
+            {parking === {} ? (
+              <span>
+                <Check />
+                有停車位
+              </span>
+            ) : (
+              <span>
+                <X />
+                沒有停車位
+              </span>
+            )}
           </div>
         </div>
         <div className="spot-desc">
           <h2>景點介紹</h2>
-          1966年林先生返臺定居，這座洋房由他親自設計，結合中國四合院與西方美學建築，藍瓦白牆，拱門迴廊，融合現代感觀及古典之美。地點則是選擇在貌似福建故鄉山景的陽明山，在此，可以聽到親切的閩南話，讓他備感欣慰。他曾經形容這座宅院「宅中有園，園中有屋，屋中有院，院中有樹，樹上有天，天上有月，不亦快哉」，陽台是林先生生前常來的地方；吃完晚飯，林先生最喜歡坐在桌旁的藤椅上，口含煙斗，欣賞夕照沉沒於觀音山際，你也可以來此體驗這樣的閑情。
-          觀看更多名人故居故事\t王大閎建國南路自宅\t錢穆故居\t孫運璿重慶南路寓所\t草山行館\t原臺灣軍司令官官邸(孫立人將軍官邸)\t摩耶精舍（張大千園邸）",
+          <p>{desc}</p>
         </div>
-        <div className="spot-update-time">上次更新：12/12/12</div>
+        <div className="spot-update-time">
+          <Edit2 />
+          <span>{updateTime}</span>
+        </div>
       </div>
       <div className="spot-contact">
-        <button className="text-button call">
-          <Phone />
-          打電話
-        </button>
-        <button className="text-button map">
+        {phone ? (
+          <a href={`tel:${phone}`} className="text-button call">
+            <Phone />
+            打電話
+          </a>
+        ) : null}
+        <a
+          href={`http://maps.google.com/maps?z=12&t=m&q=loc:${position.PositionLat}+${position.PositionLon}
+`}
+          className="text-button map"
+        >
           <Map />
           看地圖
-        </button>
+        </a>
       </div>
     </div>
   );

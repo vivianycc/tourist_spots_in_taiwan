@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import SearchResults from "./SearchResults";
-import { CITIES } from "../constants";
+import IconButton from "./IconButton";
+import { Search } from "react-feather";
 import { getAuthorizationHeader } from "../helper";
 
-function Search() {
-  const [keyword, setKeyword] = useState("宜蘭");
-  const [city, setCity] = useState("Taipei");
+function SearchSpot() {
+  const [keyword, setKeyword] = useState("公園");
   const [spots, setSpots] = useState([]);
-  const API_URL = `https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${city}?$top=30&$format=JSON`;
+  const API_URL = `https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$select=ID%2CName%2CPicture&$filter=contains(Name%2C%20'${keyword}')&$top=50&$format=JSON
+  `;
   useEffect(() => {
     requestSpots();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -28,7 +29,7 @@ function Search() {
           requestSpots();
         }}
       >
-        <label htmlFor="search">搜尋</label>
+        <label htmlFor="search">你想要去哪裡？</label>
         <input
           id="search"
           type="search"
@@ -36,7 +37,7 @@ function Search() {
           placeholder="請輸入關鍵字"
           onChange={(e) => setKeyword(e.target.value)}
         />
-        <label htmlFor="city">地點</label>
+        {/* <label htmlFor="city">地點</label>
         <select
           name="cities"
           id="city"
@@ -49,14 +50,14 @@ function Search() {
               {CITIES[city]}
             </option>
           ))}
-        </select>
-
-        <button type="submit">查詢</button>
+        </select> */}
+        <IconButton className="search dark" type="submit">
+          <Search />
+        </IconButton>
       </form>
       <SearchResults spots={spots} />
-      {console.log(spots)}
     </div>
   );
 }
 
-export default Search;
+export default SearchSpot;

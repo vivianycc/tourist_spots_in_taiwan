@@ -1,4 +1,13 @@
 function IconButton(props) {
-  return <button className="icon-button">{props.children}</button>;
+  const { className, type, clickHandler } = props;
+  return (
+    <button
+      className={className + " icon-button"}
+      type={type}
+      onClick={clickHandler}
+    >
+      {props.children}
+    </button>
+  );
 }
 export default IconButton;

@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/tourist_spots_in_taiwan/static/css/main.d6c4846a.chunk.css",
-    "main.js": "/tourist_spots_in_taiwan/static/js/main.534d76a6.chunk.js",
-    "main.js.map": "/tourist_spots_in_taiwan/static/js/main.534d76a6.chunk.js.map",
-    "runtime-main.js": "/tourist_spots_in_taiwan/static/js/runtime-main.520a973a.js",
-    "runtime-main.js.map": "/tourist_spots_in_taiwan/static/js/runtime-main.520a973a.js.map",
-    "static/js/2.6a351f28.chunk.js": "/tourist_spots_in_taiwan/static/js/2.6a351f28.chunk.js",
-    "static/js/2.6a351f28.chunk.js.map": "/tourist_spots_in_taiwan/static/js/2.6a351f28.chunk.js.map",
-    "index.html": "/tourist_spots_in_taiwan/index.html",
-    "static/css/main.d6c4846a.chunk.css.map": "/tourist_spots_in_taiwan/static/css/main.d6c4846a.chunk.css.map",
-    "static/js/2.6a351f28.chunk.js.LICENSE.txt": "/tourist_spots_in_taiwan/static/js/2.6a351f28.chunk.js.LICENSE.txt",
-    "static/media/default_spot_img.9e7fb3bf.jpg": "/tourist_spots_in_taiwan/static/media/default_spot_img.9e7fb3bf.jpg"
+    "main.css": "/static/css/main.d6c4846a.chunk.css",
+    "main.js": "/static/js/main.534d76a6.chunk.js",
+    "main.js.map": "/static/js/main.534d76a6.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.0786d737.js",
+    "runtime-main.js.map": "/static/js/runtime-main.0786d737.js.map",
+    "static/js/2.6a351f28.chunk.js": "/static/js/2.6a351f28.chunk.js",
+    "static/js/2.6a351f28.chunk.js.map": "/static/js/2.6a351f28.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.d6c4846a.chunk.css.map": "/static/css/main.d6c4846a.chunk.css.map",
+    "static/js/2.6a351f28.chunk.js.LICENSE.txt": "/static/js/2.6a351f28.chunk.js.LICENSE.txt",
+    "static/media/default_spot_img.9e7fb3bf.jpg": "/static/media/default_spot_img.9e7fb3bf.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.520a973a.js",
+    "static/js/runtime-main.0786d737.js",
     "static/js/2.6a351f28.chunk.js",
     "static/css/main.d6c4846a.chunk.css",
     "static/js/main.534d76a6.chunk.js"
